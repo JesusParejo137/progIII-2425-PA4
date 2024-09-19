@@ -1,7 +1,8 @@
 import java.util.Scanner;
 public class App {
     /*
-     * Este código solicitará al usuario tres números enteros e imprimirá el mayor
+     * Este código solicitará al usuario tres números enteros e imprimirá el mayor,
+     * en caso de que haya dos o más números iguales mayores imprime su valor.
      */
     public static void main(String[] args) throws Exception {
         // Referencia a la clase Scanner

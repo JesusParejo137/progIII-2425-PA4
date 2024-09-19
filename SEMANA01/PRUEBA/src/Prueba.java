@@ -1,7 +1,8 @@
 import java.util.Scanner;
 public class Prueba {
     /*
-     * Este código solicitará al usuario dos números enteros e imprimirá la suma
+     * Este código solicitará al usuario dos números enteros
+     * e imprimirá la suma.
      */
     public static void main(String[] args) throws Exception {
         // Referencia a la clase Scanner
