@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class OperacionesCRUD {
     private HashMap<String, Libro> biblioteca = new HashMap<>();
