@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersistenciaFicherosTextoPlano",
+            "request": "launch",
+            "mainClass": "persistenciaficherosjava.PersistenciaFicherosTextoPlano",
+            "projectName": "progIII-2425-PA4_cecbc998"
+        },
+        {
+            "type": "java",
             "name": "HolaMundo",
             "request": "launch",
             "mainClass": "HolaMundo",

@@ -1,20 +1,20 @@
-package com.empresa.almacenes.controller;
+package quiniela.controller;
 
-import com.empresa.almacenes.model.AlmacenModel;
-import com.empresa.almacenes.view.View;
+import quiniela.view.View;
+import quiniela.model.*;
 
 public class Controller {
-    
     View v;
-    AlmacenModel m;
+    QuinielaModel m;
 
-    public Controller(AlmacenModel m, View v) {
+    public Controller(QuinielaModel m, View v) {
         this.m = m;
         this.v = v;
 
         // Inyectar la instancia del controlador a la vista para que esta última tenga acceso al primero
         v.setController(this);
     }
+
     public void run() {
         boolean salir = false;
         while (!salir) {
@@ -33,16 +33,9 @@ public class Controller {
                     v.showMessage("Tabla de precios registrada correctamente.");
                     break;
                 case 3:
-                    if (m.getVentasLeidas() && m.getPreciosLeidos()) {
-                        m.calcularIngresosTotales();
-                    } else {
-                        v.showMessage("Debe ingresar la tabla de ventas y la tabla de precios primero");
-                    }
-                    break;
-                case 4:
                     v.showResult(m.getIngresosTotales());
                     break;
-                case 5:
+                case 4:
                     salir = true;
                     v.showMessage("Saliendo del programa.");
                     break;
