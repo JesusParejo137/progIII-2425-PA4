@@ -2,7 +2,7 @@ package quiniela.view;
 
 import com.coti.tools.Esdia;
 
-import quiniela.Quiniela;
+import quiniela.model.QuinielaModel;
 import quiniela.controller.Controller;
 
 public class View {
@@ -24,12 +24,6 @@ public class View {
         }
         return partidos;
     }
-
-
-
-
-
-
     
     public int[][] getTablaResultados() {
         int[][] ventas = new int[5][2];
