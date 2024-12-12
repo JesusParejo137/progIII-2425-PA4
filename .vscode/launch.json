@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MVCHerenciaInterface",
+            "request": "launch",
+            "mainClass": "mvcherenciainterface.MVCHerenciaInterface",
+            "projectName": "progIII-2425-PA4_33e3c37b"
+        },
+        {
+            "type": "java",
+            "name": "EjemploAbstracción",
+            "request": "launch",
+            "mainClass": "ejemploabstraccion.EjemploAbstracción",
+            "projectName": "progIII-2425-PA4_33e3c37b"
+        },
+        {
+            "type": "java",
+            "name": "EjemploHerencia",
+            "request": "launch",
+            "mainClass": "ejemploherencia.EjemploHerencia",
+            "projectName": "progIII-2425-PA4_33e3c37b"
+        },
+        {
+            "type": "java",
             "name": "PersistenciaFicherosTextoPlano",
             "request": "launch",
             "mainClass": "persistenciaficherosjava.PersistenciaFicherosTextoPlano",
