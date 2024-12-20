@@ -6,10 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BinaryRepository implements IRepository{
 
@@ -17,8 +16,83 @@ public class BinaryRepository implements IRepository{
 
     File ficheroEstadoSerializado = Paths.get(System.getProperty("user.home"), "tasks.bin").toFile();
 
+    public BinaryRepository() {
+        this.tareas = new ArrayList<>(); // Inicialización por defecto
+    }
+
+    // Métodos CRUD
+        
     @Override
-    public boolean exportarTareas(ArrayList<Task> tareas) {
+    public Task addTask(Task t) throws RepositoryException {
+        if (tareas.contains(t)) {
+            throw new RepositoryException("Ya existe una tarea con el mismo identificador");
+        } else {
+            tareas.add(t);
+            return t;
+        }
+    }
+
+    @Override
+    public void modifyTask(Task task) throws RepositoryException {
+        boolean encontrado = false;
+        for (Task t : tareas) {
+            if (t.getIdentifier() == task.getIdentifier()) {
+                t.setTitle(task.getTitle());
+                t.setDate(task.getDate());
+                t.setContent(task.getContent());
+                t.setPriority(task.getPriority());
+                t.setEstimatedDuration(task.getEstimatedDuration());
+                t.setCompleted(task.isCompleted());
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            throw new RepositoryException("La tarea no existe");
+        }
+    }
+
+    @Override
+    public void removeTask(Task task) throws RepositoryException {
+        boolean eliminado = false;
+        for (Task t : tareas) {
+            if (t.getIdentifier() == task.getIdentifier()) {
+                tareas.remove(t);
+                eliminado = true;
+                break;
+            }
+        }
+        if (!eliminado) {
+            throw new RepositoryException("No se encontró una tarea con el identificador especificado");
+        }
+    }
+
+    @Override
+    public List<Task> getAllTasks() throws RepositoryException {
+        return new ArrayList<>(tareas);
+    }
+
+    @Override
+    public boolean cambiarEstadoTarea(Task task) throws RepositoryException{
+        boolean encontrada = false;
+        for (Task t : tareas) {
+            if (t.getTitle().equals(task.getTitle())) {
+                if (t.isCompleted()) {
+                    t.setCompleted(false);
+                } else {
+                    t.setCompleted(true);
+                }
+                encontrada = true;
+                break;
+            }
+        }
+        return encontrada;
+    }
+
+    // Métodos importación y exportación
+
+    @Override
+    public boolean saveData() {
         
         ObjectOutputStream oos = null;
         try {
@@ -39,7 +113,7 @@ public class BinaryRepository implements IRepository{
     }
 
     @Override
-    public ArrayList<Task> importarTareas() {
+    public ArrayList<Task> loadData() {
         if (ficheroEstadoSerializado.exists() && ficheroEstadoSerializado.isFile()) {
             ObjectInputStream ois = null;
             try {
@@ -61,28 +135,4 @@ public class BinaryRepository implements IRepository{
             return null;
         }
     }
-
-    // CRUD
-    
-    @Override
-    public boolean addTask(Task t) throws RepositoryException {
-        if (tareas.contains(t)) {
-            return false;
-        } else {
-            tareas.add(t);
-            return true;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 }

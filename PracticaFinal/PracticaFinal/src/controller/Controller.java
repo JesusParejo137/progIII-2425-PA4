@@ -1,5 +1,11 @@
 package controller;
 
+import java.nio.file.Path;
+import java.util.List;
+
+import model.ExporterException;
+import model.ExporterFactory;
+import model.IExporter;
 import model.Model;
 import model.RepositoryException;
 import model.Task;
@@ -36,7 +42,51 @@ public class Controller {
         }
     }
 
-    public boolean agregarTarea(Task task) throws RepositoryException{
-        return model.agregarTarea(task);
+
+    // Métodos CRUD
+
+    public void agregarTarea(Task task) throws RepositoryException{
+        model.agregarTarea(task);
+    }
+
+    public void modificarTarea(Task task) throws RepositoryException{
+        model.modificarTarea(task);
+    }
+
+    public List<Task> obtenerTareasSinCompletar() throws RepositoryException {
+        return model.obtenerTareasSinCompletar();
+    }
+
+    public List<Task> obtenerTodasLasTareas() throws RepositoryException {
+        return model.obtenerTodasLasTareas();
+    }
+
+    public boolean cambiarEstadoTarea(Task task) throws RepositoryException{
+        return model.cambiarEstadoTarea(task);
+    }
+
+    public void eliminarTarea(Task task) throws RepositoryException {
+        model.eliminarTarea(task);
+    }
+
+    // Importación y exportación
+
+    public void configurarExportador(String tipo) {
+            IExporter exporter = ExporterFactory.getExporter(tipo);
+            model.setExporter(exporter);
+        try {
+            
+            view.showMessage("Exportador configurado como: " + tipo);
+        } catch (IllegalArgumentException e) {
+            view.showErrorMessage("Tipo de exportador no válido: " + e.getMessage());
+        }
+    }
+
+    public void importarTareas(Path filePath) throws ExporterException{
+        model.importarTareas(filePath);
+    }
+
+    public void exportarTareas(Path filePath) throws ExporterException, RepositoryException {
+        model.exportarTareas(filePath);
     }
 }

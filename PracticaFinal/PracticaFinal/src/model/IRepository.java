@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
     /*
      * Interfaz con operaciones CRUD
@@ -9,9 +10,18 @@ import java.util.ArrayList;
 
 public interface IRepository {
 
-    public abstract ArrayList<Task> importarTareas();
-    
-    public abstract boolean exportarTareas(ArrayList<Task> tareas);
+    Task addTask(Task t) throws RepositoryException;
 
-    public abstract boolean addTask(Task t) throws RepositoryException;
+    void modifyTask(Task task) throws RepositoryException;
+
+    void removeTask(Task task) throws RepositoryException;
+
+    List<Task> getAllTasks() throws RepositoryException;
+
+    boolean cambiarEstadoTarea(Task task) throws RepositoryException;
+
+    ArrayList<Task> loadData();
+    
+    boolean saveData();
+    
 }
